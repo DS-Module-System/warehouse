@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% import 'core/default_templates/form_search.html.twig' as form_search %}
+{% import 'core/default_templates/data_table_macro.html.twig' as data_table %}
+
+{% block body %}
+    {{ form_search.form_search(form, ["warehouse", "product", "quantityFrom", "quantityTo"]) }}
+
+    {{ data_table.table(rows, {
+        "newLink": data_table.new_btn('warehouse_stock_create'),
+        "cols" : {
+            "tableAction": {
+                "label": "core.module.actionTitle",
+                "edit": path('warehouse_stock_edit', {"id": -1}),
+            },
+            "warehouse.name": {
+                "label": "warehouse.warehouse",
+            },
+            "product.name": {
+                "label": "warehouse.product",
+            },
+            "product.measure.label": {
+                "label": "warehouse.measure",
+                "trans": true,
+            },
+            "quantity": {
+                "label": "warehouse.quantity",
+                "type": "currency",
+            },
+            "createdAt": {
+                "label": "warehouse.created_at",
+                "type": "datetime",
+            },
+            "updatedAt": {
+                "label": "warehouse.updated_at",
+                "type": "datetime",
+            },
+        }
+    }) }}
+{% endblock %} 
